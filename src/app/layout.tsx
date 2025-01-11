@@ -24,9 +24,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"/>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <nav>
+          <h1>DollTrack</h1>
+          <details>
+            <summary>
+              menu
+            </summary>
+            <ul>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Logs and summaries</a></li>
+              <li><a href="#">Statistics and charts</a></li>
+              <li><a href="#">Budgets and goals</a></li>
+              <li><a href="#">Settings</a></li>
+            </ul>
+          </details>
+        </nav>
         {children}
       </body>
     </html>

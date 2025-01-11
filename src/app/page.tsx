@@ -1,101 +1,130 @@
 import Image from "next/image";
 
+// Define the type for categories
+type Categories = {
+  [key: string]: {
+    title: string;
+    type: "expense" | "income";
+  };
+};
+
+// Define the type for a log entry
+type LogEntry = {
+  id: number;
+  category_id: keyof Categories; // Ensures category_id matches categories' keys
+  description: string;
+  type: "expense" | "income";
+  amount: number;
+  date: Date;
+};
+
+// Define the full type for sampleData
+type SampleData = {
+  lm_income: number;
+  lm_expenses: number;
+  lt_income: number;
+  lt_expenses: number;
+  lt_savings: number;
+  logs: LogEntry[];
+  categories: Categories;
+};
+
+const sampleData: SampleData = {
+  lm_income: 6850.00,
+  lm_expenses: 2312.15,
+  lt_income: 11780.00,
+  lt_expenses: 7823.00,
+  lt_savings: 2150.00,
+  logs: [
+    {
+      id: 0,
+      category_id: "2",
+      description: "",
+      type: "expense",
+      amount: 45.05,
+      date: new Date(2024, 12, 10)
+    },
+    {
+      id: 1,
+      category_id: "0",
+      description: "coffee with annie",
+      type: "expense",
+      amount: 45.05,
+      date: new Date(2024, 12, 12)
+    },
+    {
+      id: 2,
+      category_id: "3",
+      description: "",
+      type: "income",
+      amount: 1505.00,
+      date: new Date(2024, 11, 15)
+    },
+    {
+      id: 3,
+      category_id: "1",
+      description: "",
+      type: "expense",
+      amount: 1354.50,
+      date: new Date(2025, 0, 1)
+    },
+    {
+      id: 4,
+      category_id: "2",
+      description: "",
+      type: "expense",
+      amount: 65.32,
+      date: new Date(2025, 0, 3)
+    }
+  ],
+  categories: {
+    "0": {
+      title: "Coffee and fast food",
+      type: "expense"
+    },
+    "1": {
+      title: "Rent",
+      type: "expense"
+    },
+    "2": {
+      title: "Gas",
+      type: "expense"
+    },
+    "3": {
+      title: "Weekly payment",
+      type: "income"
+    }
+  }
+}
+
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <>
+      <section>
+        <p>Available: ${(sampleData.lt_income - sampleData.lt_expenses - sampleData.lt_savings).toFixed(2)}</p>
+        <p>Last month income: ${(sampleData.lm_income).toFixed(2)}</p>
+        <p>Last month expenses: ${(sampleData.lm_expenses).toFixed(2)}</p>
+      </section>
+      <section>
+        <p>Savings: ${(sampleData.lt_savings).toFixed(2)}</p>
+      </section>
+      <section>
+        <p>Recent logs:</p>
+        <button>New log +</button>
+        {sampleData.logs
+          .slice(-3).reverse()
+          .map((log) => (
+            <div key={log.id}>
+              <span>{log.amount.toFixed(2)}
+              {" - "}
+              {sampleData.categories[log.category_id].title}</span>
+              <p>{log.description}</p>
+              <p>{log.date.toDateString()}</p>
+            </div>
+          ))
+        }
+        <button>See all logs...</button>
+      </section>
+    </>
   );
 }
