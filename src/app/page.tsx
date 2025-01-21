@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 
 // Define the type for categories
 type Categories = {
